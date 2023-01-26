@@ -1,120 +1,114 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
 import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import {Image, StyleSheet, Text, View} from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+// const Comp = () => {
+//   return <Text>ini dari component lain</Text>;
+// };
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
+// const Photo = () => {
+//   return (
+//     <Image
+//       source={{uri: 'https://placeimg.com/100/100/animals'}}
+//       style={{width: 100, height: 100, borderRadius: 100}}
+//     />
+//   );
+// };
 
-function Section({children, title}: SectionProps): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
+const ImgBarang = () => {
   return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
+    <Image
+      source={{uri: 'https://placeimg.com/150/150/tech'}}
+      style={{width: '100%', height: 150, borderRadius: 10}}
+    />
+  );
+};
+const App = () => {
+  return (
+    <View>
+      <View style={style.hero}>
+        <Text
+          style={{
+            textAlign: 'center',
+            textTransform: 'uppercase',
+            letterSpacing: 7,
+            fontSize: 20,
+            fontWeight: '600',
+          }}>
+          Inventory app
+        </Text>
+      </View>
+      <View style={style.content}>
+        <Text>List Barang : </Text>
+        <View style={style.barang}>
+          <View style={style.itemBarang}>
+            <Text>Nama Barang</Text>
+            <ImgBarang />
+            <View style={style.button}>
+              <Text style={{textAlign: 'center'}}>detail</Text>
+            </View>
+          </View>
+        </View>
+        {/* <Photo />
+        <Text>Hello</Text>
+        <Comp />
+        <TextInput style={style.textInput} /> */}
+      </View>
     </View>
   );
-}
+};
 
-function App(): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Hello World">
-            <Text>Hello Ini adalah project android pertama saya</Text>
-          </Section>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
-}
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+const style = StyleSheet.create({
+  content: {
+    backgroundColor: '#f1f5f9',
+    width: '100%',
+    height: '100%',
+    padding: 20,
+    display: 'flex',
+    gap: 5,
   },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
+  hero: {
+    width: '100%',
+    height: 200,
+    backgroundColor: '#7dd3fc',
+    display: 'flex',
+    justifyContent: 'center',
   },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
+  barang: {
+    width: '100%',
+    height: 'auto',
+    display: 'flex',
   },
-  highlight: {
-    fontWeight: '700',
+  itemBarang: {
+    width: '50%',
+    backgroundColor: '#f8fafc',
+    display: 'flex',
+    borderRadius: 10,
+    gap: 10,
+    padding: 15,
+    shadowColor: '#aaa',
+    shadowOffset: {
+      width: 0,
+      height: 8,
+    },
+    shadowOpacity: 0.46,
+    shadowRadius: 11.14,
+    elevation: 17,
+  },
+  textInput: {
+    width: '50%',
+    borderWidth: 1,
+    borderRadius: 10,
+    borderColor: '#aaa',
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    marginTop: 10,
+  },
+  button: {
+    backgroundColor: '#22d3ee',
+    borderRadius: 7,
+    shadowColor: '#555',
+    padding: 5,
+    width: '100%',
   },
 });
 

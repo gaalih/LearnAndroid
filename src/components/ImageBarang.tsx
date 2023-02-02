@@ -1,11 +1,14 @@
 import React from 'react';
 import {Image} from 'react-native';
 
-const ImageBarang = () => {
+interface ImageBarangProps {
+  image: string;
+}
+const ImageBarang = ({image}: ImageBarangProps) => {
   return (
     <Image
-      source={{uri: 'https://placeimg.com/150/150/tech'}}
-      style={{width: '100%', height: 140, borderRadius: 10}}
+      source={{uri: image}}
+      style={{width: '100%', height: 100, borderRadius: 10}}
     />
   );
 };

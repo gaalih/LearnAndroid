@@ -1,103 +1,74 @@
-import React, {useState, useEffect} from 'react';
-import {
-  ActivityIndicator,
-  FlatList,
-  Image,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
-import Header from './components/Header';
-// import ItemCard from './components/ItemCard';
-// import {getUsers} from './lib/utils';
-import Axios from 'axios';
+import React from 'react';
+import {ListRenderItem} from 'react-native';
+import {Container, ItemContainer, ItemName, UsersList} from './styles/style';
 
-// import Loading from './components/Loading';
-// import Error from './components/Error';
+export interface IUser {
+  id: string;
+  name: string;
+}
+
+const DATA = [
+  {
+    id: '1',
+    name: 'Michael Scott',
+  },
+  {
+    id: '2',
+    name: 'Jim Halpert',
+  },
+  {
+    id: '3',
+    name: 'Pam Beesly',
+  },
+  {
+    id: '4',
+    name: 'Dwight Schrute',
+  },
+  {
+    id: '5',
+    name: 'Andy Bernard',
+  },
+  {
+    id: '6',
+    name: 'Ryan Howard',
+  },
+  {
+    id: '7',
+    name: 'Kelly Kapoor',
+  },
+  {
+    id: '8',
+    name: 'Toby Flenderson',
+  },
+  {
+    id: '9',
+    name: 'Stanley Hudson',
+  },
+  {
+    id: '10',
+    name: 'Phyllis Vance',
+  },
+];
+
+const Item = ({data}: {data: IUser}) => (
+  <ItemContainer>
+    <ItemName>{data.name}</ItemName>
+  </ItemContainer>
+);
 
 const App = () => {
-  const [users, setUsers] = useState([]);
-  const [currPage, setCurrPage] = useState(1);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const getUsers = async () => {
-    setIsLoading(true);
-    await Axios.get(
-      `https://randomuser.me/api/?page=${currPage}&results=10`,
-    ).then(res => {
-      setUsers([...users, ...res.data.results]);
-      setIsLoading(false);
-    });
-  };
-
-  const renderItem = ({item}: any) => {
-    return (
-      <View>
-        <Image
-          source={{uri: item.picture?.thumbnail}}
-          style={{width: 100, height: 100, borderRadius: 10}}
-        />
-        <Text>
-          {item.name.first} {item.name.last}
-        </Text>
-      </View>
-    );
-  };
-
-  const renderLoader = () => {
-    return (
-      <View>
-        <ActivityIndicator size={'large'} color={'#999'} />
-      </View>
-    );
-  };
-  const loadMoreItems = () => {
-    setCurrPage(currPage + 1);
-  };
-
-  useEffect(() => {
-    getUsers();
-  }, [currPage]);
+  const renderItem: ListRenderItem<IUser> = ({item}) => <Item data={item} />;
 
   return (
-    <FlatList
-      data={users}
-      renderItem={renderItem}
-      keyExtractor={item => item.email}
-      ListFooterComponent={renderLoader}
-      onEndReached={loadMoreItems}
-      onEndReachedThreshold={0}
-    />
+    <Container>
+      <UsersList
+        data={DATA}
+        renderItem={renderItem}
+        keyExtractor={(item: IUser) => item.id}
+        numColumns={3}
+      />
+    </Container>
   );
-  // return (
-  //   <View>
-  //     <ScrollView>
-  //       <Header />
-  //       <View style={style.content}>
-  //         <Text style={{marginBottom: 10}}>List Barang : </Text>
-  //         {/* <ItemCard data={data} /> */}
-  //         <FlatList
-  //           data={users}
-  //           renderItem={renderItem}
-  //           // keyExtractor={item => item.email}
-  //         />
-  //       </View>
-  //     </ScrollView>
-  //   </View>
-  // );
 };
-
-const style = StyleSheet.create({
-  content: {
-    backgroundColor: '#f1f5f9',
-    width: '100%',
-    height: '100%',
-    minHeight: '100%',
-    padding: 20,
-    display: 'flex',
-    gap: 5,
-  },
-});
 
 export default App;
